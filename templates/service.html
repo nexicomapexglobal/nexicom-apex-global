@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ service.title }} | {{ site.site_name }}
+{% endblock %}
+
+{% block content %}
+
+{% if service.image %}
+    {% set image_path = service.image|replace('\\', '/') %}
+
+    {% if image_path.startswith('static/') %}
+        {% set image_path = image_path[7:] %}
+    {% elif image_path.startswith('services/') %}
+        {% set image_path = 'uploads/' ~ image_path %}
+    {% elif not image_path.startswith('uploads/') %}
+        {% set image_path = 'uploads/services/' ~ image_path.split('/')[-1] %}
+    {% endif %}
+{% endif %}
+
+<section class="service-detail-hero">
+    <div class="service-detail-hero-inner">
+
+        <div class="service-detail-copy">
+            <a href="/#services" class="service-back-link">
+                ← Back to Services
+            </a>
+
+            <span class="service-label">
+                {{ service.icon or '✦' }} Our Services
+            </span>
+
+            <h1>{{ service.title }}</h1>
+
+            <p class="service-intro">
+                {{ service.short_description }}
+            </p>
+
+            <div class="service-hero-actions">
+                <a href="/contact" class="btn primary">
+                    Get Started
+                </a>
+
+                <a href="tel:{{ site.phone }}" class="service-phone-link">
+                    Speak with our team
+                </a>
+            </div>
+        </div>
+
+        {% if service.image %}
+        <div class="service-detail-image">
+            <img
+                src="{{ url_for('static', filename=image_path) }}"
+                alt="{{ service.title }}"
+            >
+
+            <div class="service-image-badge">
+                <strong>Professional Solutions</strong>
+                <span>Tailored for your business</span>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+
+<section class="service-content-section">
+    <div class="service-content-grid">
+
+        <article class="service-main-card">
+            <div class="service-content-heading">
+                <span>About the Service</span>
+                <h2>Build stronger teams with the right talent</h2>
+            </div>
+
+            <div class="service-richtext">
+                {{ service.description|replace('\n', '<br>')|safe }}
+            </div>
+        </article>
+
+        <aside class="service-enquiry-card">
+            <div class="enquiry-icon">↗</div>
+
+            <span class="enquiry-label">Let’s work together</span>
+
+            <h3>Need this service?</h3>
+
+            <p>
+                Tell us about your requirements and our team will respond with
+                the right solution and next steps.
+            </p>
+
+            <a class="btn primary service-enquiry-button" href="/contact">
+                Start a Conversation
+            </a>
+
+            {% if site.email %}
+            <a class="service-contact-detail" href="mailto:{{ site.email }}">
+                {{ site.email }}
+            </a>
+            {% endif %}
+
+            {% if site.phone %}
+            <a class="service-contact-detail" href="tel:{{ site.phone }}">
+                {{ site.phone }}
+            </a>
+            {% endif %}
+        </aside>
+
+    </div>
+</section>
+
+<section class="service-bottom-cta">
+    <div>
+        <span>Ready to get started?</span>
+        <h2>Let Nexicom Apex Global support your business growth.</h2>
+    </div>
+
+    <a href="/contact" class="btn primary">
+        Contact Our Team
+    </a>
+</section>
+
+{% endblock %}

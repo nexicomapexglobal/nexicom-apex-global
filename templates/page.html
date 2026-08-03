@@ -1,0 +1,434 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ page.title }} | {{ site.site_name }}
+{% endblock %}
+
+{% block content %}
+
+{% set page_slug = page.slug|default('')|lower %}
+{% set page_title = page.title|default('')|lower %}
+
+{% if page_slug == 'about' or 'about' in page_title %}
+
+<section class="about-hero">
+    <div class="about-hero-inner">
+
+        <div class="about-hero-copy">
+            <span class="about-eyebrow">
+                {{ page.eyebrow or 'Who We Are' }}
+            </span>
+
+            <h1>
+                Building people.
+                <span>Strengthening businesses.</span>
+            </h1>
+
+            <p>
+                Nexicom Apex Global is a people-first business solutions
+                company delivering recruitment, staffing, BPO, HR consulting,
+                customer support, training, workforce management, and business
+                consulting services.
+            </p>
+
+            <div class="about-hero-actions">
+                <a href="{{ url_for('contact') }}" class="btn primary">
+                    Work With Us
+                </a>
+
+                <a
+                    href="{{ url_for('home') }}#services"
+                    class="about-secondary-link"
+                >
+                    Explore Our Services
+                </a>
+            </div>
+        </div>
+
+        <div class="about-hero-card">
+            <span>Our Purpose</span>
+
+            <h3>
+                Connecting capable people with meaningful opportunities.
+            </h3>
+
+            <p>
+                We help organizations build dependable teams, improve
+                performance, optimize operations, and achieve sustainable
+                business growth.
+            </p>
+
+            <div class="about-hero-points">
+                <div>
+                    <strong>People</strong>
+                    <span>Talent and workforce solutions</span>
+                </div>
+
+                <div>
+                    <strong>Process</strong>
+                    <span>Structured and reliable execution</span>
+                </div>
+
+                <div>
+                    <strong>Performance</strong>
+                    <span>Measurable business outcomes</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="about-overview-section">
+    <div class="about-overview-grid">
+
+        <div class="about-overview-heading">
+            <span>About Nexicom Apex Global</span>
+
+            <h2>
+                A dependable partner for people, operations, and business
+                growth
+            </h2>
+        </div>
+
+        <div class="about-richtext">
+            {{ page.body|replace('\n', '<br>')|safe }}
+        </div>
+
+    </div>
+</section>
+
+<section class="about-mission-section">
+    <div class="about-mission-grid">
+
+        <article class="about-mission-card">
+            <div class="about-card-number">01</div>
+
+            <span>Our Mission</span>
+
+            <h3>
+                Create opportunities and deliver measurable business value
+            </h3>
+
+            <p>
+                To connect organizations with capable people, reliable
+                processes, and customized business solutions that improve
+                productivity, service quality, and long-term growth.
+            </p>
+        </article>
+
+        <article class="about-mission-card">
+            <div class="about-card-number">02</div>
+
+            <span>Our Vision</span>
+
+            <h3>
+                Become a trusted partner for workforce and business solutions
+            </h3>
+
+            <p>
+                To build a respected organization known for integrity,
+                operational excellence, customer commitment, employee growth,
+                and sustainable partnerships.
+            </p>
+        </article>
+
+    </div>
+</section>
+
+<section class="about-values-section">
+    <div class="about-section-heading">
+        <span>Our Values</span>
+
+        <h2>The principles that guide our work</h2>
+
+        <p>
+            Our culture is built around responsibility, professionalism,
+            collaboration, continuous improvement, and customer success.
+        </p>
+    </div>
+
+    <div class="about-values-grid">
+
+        <article>
+            <div>🤝</div>
+
+            <h3>Integrity</h3>
+
+            <p>
+                We communicate honestly, act responsibly, and build trust
+                through transparent business practices.
+            </p>
+        </article>
+
+        <article>
+            <div>🎯</div>
+
+            <h3>Customer Commitment</h3>
+
+            <p>
+                We understand each client’s goals and deliver solutions focused
+                on practical business results.
+            </p>
+        </article>
+
+        <article>
+            <div>📈</div>
+
+            <h3>Continuous Growth</h3>
+
+            <p>
+                We encourage learning, innovation, stronger performance, and
+                continuous organizational improvement.
+            </p>
+        </article>
+
+        <article>
+            <div>🏆</div>
+
+            <h3>Excellence</h3>
+
+            <p>
+                We maintain high standards in recruitment, operations,
+                consulting, service delivery, and customer support.
+            </p>
+        </article>
+
+    </div>
+</section>
+
+<section class="about-solutions-section">
+    <div class="about-solutions-inner">
+
+        <div class="about-solutions-copy">
+            <span>What We Do</span>
+
+            <h2>
+                Business solutions designed around your goals
+            </h2>
+
+            <p>
+                We support startups, SMEs, and enterprise organizations with
+                flexible services that strengthen teams, operations, customer
+                experience, and business performance.
+            </p>
+
+            <a
+                href="{{ url_for('home') }}#services"
+                class="btn primary"
+            >
+                View All Services
+            </a>
+        </div>
+
+        <div class="about-solutions-list">
+
+            <a
+                href="{{ url_for(
+                    'service_detail',
+                    slug='recruitment-staffing'
+                ) }}"
+            >
+                <span>01</span>
+                <strong>Recruitment & Staffing</strong>
+                <b>→</b>
+            </a>
+
+            <a
+                href="{{ url_for(
+                    'service_detail',
+                    slug='bpo-solutions'
+                ) }}"
+            >
+                <span>02</span>
+                <strong>BPO Solutions</strong>
+                <b>→</b>
+            </a>
+
+            <a
+                href="{{ url_for(
+                    'service_detail',
+                    slug='hr-consulting'
+                ) }}"
+            >
+                <span>03</span>
+                <strong>HR Consulting</strong>
+                <b>→</b>
+            </a>
+
+            <a
+                href="{{ url_for(
+                    'service_detail',
+                    slug='customer-support'
+                ) }}"
+            >
+                <span>04</span>
+                <strong>Customer Support</strong>
+                <b>→</b>
+            </a>
+
+            <a
+                href="{{ url_for(
+                    'service_detail',
+                    slug='corporate-training'
+                ) }}"
+            >
+                <span>05</span>
+                <strong>Corporate Training</strong>
+                <b>→</b>
+            </a>
+
+            <a
+                href="{{ url_for(
+                    'service_detail',
+                    slug='business-consulting'
+                ) }}"
+            >
+                <span>06</span>
+                <strong>Business Consulting</strong>
+                <b>→</b>
+            </a>
+
+            <a
+                href="{{ url_for(
+                    'service_detail',
+                    slug='sales-lead-generation'
+                ) }}"
+            >
+                <span>07</span>
+                <strong>Sales & Lead Generation</strong>
+                <b>→</b>
+            </a>
+
+            <a
+                href="{{ url_for(
+                    'service_detail',
+                    slug='workforce-management'
+                ) }}"
+            >
+                <span>08</span>
+                <strong>Workforce Management</strong>
+                <b>→</b>
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="about-why-section">
+    <div class="about-section-heading">
+        <span>Why Nexicom Apex Global</span>
+
+        <h2>
+            Professional service with personal attention
+        </h2>
+    </div>
+
+    <div class="about-why-grid">
+
+        <article>
+            <strong>01</strong>
+
+            <h3>Experienced Professionals</h3>
+
+            <p>
+                Skilled teams with practical experience across recruitment,
+                BPO, HR, customer service, and consulting.
+            </p>
+        </article>
+
+        <article>
+            <strong>02</strong>
+
+            <h3>Customized Solutions</h3>
+
+            <p>
+                Flexible services designed around your workforce,
+                operational, and business requirements.
+            </p>
+        </article>
+
+        <article>
+            <strong>03</strong>
+
+            <h3>Quality-Focused Delivery</h3>
+
+            <p>
+                Structured processes, regular monitoring, transparent
+                communication, and measurable outcomes.
+            </p>
+        </article>
+
+        <article>
+            <strong>04</strong>
+
+            <h3>Long-Term Partnership</h3>
+
+            <p>
+                We aim to become a dependable extension of your organization
+                and support sustainable growth.
+            </p>
+        </article>
+
+    </div>
+</section>
+
+<section class="about-bottom-cta">
+    <div>
+        <span>Let’s work together</span>
+
+        <h2>
+            Build stronger teams, better processes, and sustainable growth.
+        </h2>
+
+        <p>
+            Speak with our team about recruitment, outsourcing, HR,
+            customer support, training, and business consulting.
+        </p>
+    </div>
+
+    <a
+        href="{{ url_for('contact') }}"
+        class="btn about-white-button"
+    >
+        Contact Nexicom
+    </a>
+</section>
+
+{% else %}
+
+<section class="page-hero">
+    <p class="eyebrow">
+        {{ page.eyebrow }}
+    </p>
+
+    <h1>
+        {{ page.title }}
+    </h1>
+</section>
+
+<section class="page-body">
+    <div class="richtext">
+        {{ page.body|replace('\n', '<br>')|safe }}
+    </div>
+
+    <aside>
+        <h3>Let’s work together</h3>
+
+        <p>
+            Speak with our team about hiring, outsourcing, and business growth.
+        </p>
+
+        <a
+            class="btn primary"
+            href="{{ url_for('contact') }}"
+        >
+            Contact Nexicom
+        </a>
+    </aside>
+</section>
+
+{% endif %}
+
+{% endblock %}

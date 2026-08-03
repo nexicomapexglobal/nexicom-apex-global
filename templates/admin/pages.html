@@ -1,0 +1,20 @@
+
+{% extends "admin/base.html" %}
+{% block heading %}Pages{% endblock %}
+{% block content %}
+{% for page in pages %}
+<div class="admin-card">
+  <div class="card-head"><h2>/{{ page.slug }}</h2></div>
+  <form method="post" class="admin-form">
+    <input type="hidden" name="id" value="{{ page.id }}">
+    <div class="form-grid">
+      <label>Eyebrow<input name="eyebrow" value="{{ page.eyebrow }}"></label>
+      <label>Title<input name="title" value="{{ page.title }}"></label>
+      <label class="wide">Content<textarea name="body" rows="8">{{ page.body }}</textarea></label>
+      <label class="check"><input type="checkbox" name="is_active" {% if page.is_active %}checked{% endif %}> Active</label>
+    </div>
+    <button>Save page</button>
+  </form>
+</div>
+{% endfor %}
+{% endblock %}

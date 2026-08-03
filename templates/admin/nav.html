@@ -1,0 +1,31 @@
+
+{% extends "admin/base.html" %}
+{% block heading %}Navbar{% endblock %}
+{% block content %}
+<div class="admin-card">
+  <div class="card-head"><h2>Add navigation item</h2></div>
+  <form method="post" class="inline-form">
+    <input name="label" placeholder="Label" required>
+    <input name="url" placeholder="/about or /#team" required>
+    <input type="number" name="sort_order" value="0">
+    <label class="check"><input type="checkbox" name="is_active" checked> Active</label>
+    <button>Add</button>
+  </form>
+</div>
+
+{% for item in items %}
+<div class="admin-card compact">
+  <form method="post" class="inline-form">
+    <input type="hidden" name="id" value="{{ item.id }}">
+    <input name="label" value="{{ item.label }}" required>
+    <input name="url" value="{{ item.url }}" required>
+    <input type="number" name="sort_order" value="{{ item.sort_order }}">
+    <label class="check"><input type="checkbox" name="is_active" {% if item.is_active %}checked{% endif %}> Active</label>
+    <button>Save</button>
+  </form>
+  <form method="post" action="{{ url_for('admin_nav_delete', item_id=item.id) }}" onsubmit="return confirm('Delete this navbar item?')">
+    <button class="danger">Delete</button>
+  </form>
+</div>
+{% endfor %}
+{% endblock %}

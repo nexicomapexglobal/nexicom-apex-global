@@ -1,0 +1,274 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Careers | {{ site.site_name }}
+{% endblock %}
+
+{% block content %}
+
+<section class="careers-hero">
+    <div class="careers-hero-inner">
+
+        <div class="careers-hero-copy">
+            <span class="careers-eyebrow">Join Nexicom Apex Global</span>
+
+            <h1>
+                Build meaningful work.
+                <span>Grow with us.</span>
+            </h1>
+
+            <p>
+                Join a team focused on people, performance, innovation, and
+                business growth. Explore current opportunities and take the
+                next step in your career with Nexicom Apex Global.
+            </p>
+
+            <div class="careers-hero-actions">
+                <a href="#open-positions" class="btn primary">
+                    Explore Open Positions
+                </a>
+
+                <a href="/contact" class="careers-secondary-link">
+                    Contact Our HR Team
+                </a>
+            </div>
+        </div>
+
+        <div class="careers-hero-card">
+            <span>Why Join Us?</span>
+
+            <h3>A workplace where your contribution matters.</h3>
+
+            <div class="careers-hero-points">
+                <div>
+                    <strong>01</strong>
+                    <p>Career Growth</p>
+                </div>
+
+                <div>
+                    <strong>02</strong>
+                    <p>Learning Opportunities</p>
+                </div>
+
+                <div>
+                    <strong>03</strong>
+                    <p>Supportive Culture</p>
+                </div>
+
+                <div>
+                    <strong>04</strong>
+                    <p>Meaningful Work</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="careers-culture-section">
+    <div class="careers-section-heading">
+        <span>Life at Nexicom</span>
+
+        <h2>A place to learn, contribute, and succeed</h2>
+
+        <p>
+            We bring together talented professionals who are committed to
+            delivering exceptional recruitment, BPO, HR, customer support,
+            consulting, and workforce solutions.
+        </p>
+    </div>
+
+    <div class="careers-benefits-grid">
+
+        <article class="careers-benefit-card">
+            <div class="careers-benefit-icon">📈</div>
+            <h3>Career Development</h3>
+            <p>
+                Build new skills, take on meaningful responsibilities, and
+                develop your career through practical experience.
+            </p>
+        </article>
+
+        <article class="careers-benefit-card">
+            <div class="careers-benefit-icon">🎓</div>
+            <h3>Continuous Learning</h3>
+            <p>
+                Learn through structured training, mentorship, teamwork, and
+                exposure to different business functions.
+            </p>
+        </article>
+
+        <article class="careers-benefit-card">
+            <div class="careers-benefit-icon">🤝</div>
+            <h3>Collaborative Culture</h3>
+            <p>
+                Work with supportive professionals who value communication,
+                respect, accountability, and teamwork.
+            </p>
+        </article>
+
+        <article class="careers-benefit-card">
+            <div class="careers-benefit-icon">🏆</div>
+            <h3>Performance Recognition</h3>
+            <p>
+                We appreciate strong performance, initiative, consistency, and
+                meaningful contributions.
+            </p>
+        </article>
+
+    </div>
+</section>
+
+<section class="careers-jobs-section" id="open-positions">
+    <div class="careers-jobs-inner">
+
+        <div class="careers-jobs-header">
+            <div>
+                <span>Current Opportunities</span>
+                <h2>Find your next opportunity</h2>
+            </div>
+
+            <p>
+                Explore our active job openings and apply online for a role
+                that matches your skills, experience, and career goals.
+            </p>
+        </div>
+
+        <div class="careers-job-list">
+
+            {% for j in jobs %}
+            <article class="careers-job-card">
+
+                <div class="careers-job-main">
+                    <div class="careers-job-icon">
+                        {{ j.title[:1] }}
+                    </div>
+
+                    <div class="careers-job-content">
+                        <div class="careers-job-tags">
+                            {% if j.department %}
+                            <span>{{ j.department }}</span>
+                            {% endif %}
+
+                            {% if j.location %}
+                            <span>{{ j.location }}</span>
+                            {% endif %}
+                        </div>
+
+                        <h3>{{ j.title }}</h3>
+
+                        <div class="careers-job-meta">
+                            {% if j.employment_type %}
+                            <span>
+                                <b>Employment:</b>
+                                {{ j.employment_type }}
+                            </span>
+                            {% endif %}
+
+                            {% if j.experience %}
+                            <span>
+                                <b>Experience:</b>
+                                {{ j.experience }}
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <a
+                    class="btn primary careers-apply-button"
+                    href="{{ url_for('apply', job_id=j.id) }}"
+                >
+                    View & Apply
+                    <span>→</span>
+                </a>
+
+            </article>
+
+            {% else %}
+
+            <div class="careers-empty-state">
+                <div class="careers-empty-icon">💼</div>
+
+                <span>Current Openings</span>
+
+                <h3>No active positions at the moment</h3>
+
+                <p>
+                    We are always interested in connecting with talented
+                    professionals. Please check this page again soon or contact
+                    our HR team for future opportunities.
+                </p>
+
+                <div class="careers-empty-actions">
+                    <a href="/contact" class="btn primary">
+                        Contact HR Team
+                    </a>
+
+                    <a href="/" class="btn ghost">
+                        Return to Home
+                    </a>
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+<section class="careers-values-section">
+    <div class="careers-values-copy">
+        <span>Our Values</span>
+
+        <h2>What guides the way we work</h2>
+
+        <p>
+            Our culture is built around professionalism, continuous learning,
+            customer commitment, teamwork, and measurable performance.
+        </p>
+    </div>
+
+    <div class="careers-values-grid">
+        <div>
+            <strong>01</strong>
+            <h3>Integrity</h3>
+            <p>We communicate honestly and work responsibly.</p>
+        </div>
+
+        <div>
+            <strong>02</strong>
+            <h3>Ownership</h3>
+            <p>We take responsibility for our work and results.</p>
+        </div>
+
+        <div>
+            <strong>03</strong>
+            <h3>Growth</h3>
+            <p>We continuously learn, improve, and move forward.</p>
+        </div>
+
+        <div>
+            <strong>04</strong>
+            <h3>Excellence</h3>
+            <p>We focus on quality, consistency, and customer success.</p>
+        </div>
+    </div>
+</section>
+
+<section class="careers-bottom-cta">
+    <div>
+        <span>Build your future with us</span>
+        <h2>Ready to take the next step in your career?</h2>
+        <p>
+            Explore our openings or speak with our HR team about future
+            opportunities at Nexicom Apex Global.
+        </p>
+    </div>
+
+    <a href="#open-positions" class="btn careers-white-button">
+        View Opportunities
+    </a>
+</section>
+
+{% endblock %}

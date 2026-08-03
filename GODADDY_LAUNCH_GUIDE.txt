@@ -1,0 +1,46 @@
+NEXICOM APEX GLOBAL — GODADDY LAUNCH GUIDE
+
+IMPORTANT: This Flask website requires a GoDaddy hosting plan that supports Python applications (normally a VPS or cPanel plan with "Setup Python App"). Standard GoDaddy shared Web Hosting may not support Flask.
+
+1. Before upload
+- Copy .env.example to .env
+- Change SECRET_KEY and ADMIN_PASSWORD
+- Replace phone, WhatsApp and email from Admin > Website Control after login
+
+2. cPanel / Setup Python App
+- Upload all project files into a folder such as nexicom
+- In cPanel open Setup Python App
+- Python version: 3.11 or newer
+- Application root: nexicom
+- Application URL: your domain
+- Startup file: passenger_wsgi.py
+- Entry point: application
+- Create the app
+
+3. Install packages
+- Open the terminal command shown by cPanel to activate the virtual environment
+- Run: pip install -r requirements.txt
+- Restart the Python application
+
+4. Domain
+- Point the domain to the hosting account/IP using GoDaddy DNS
+- Add www CNAME to @ when required
+- Enable the free SSL certificate in cPanel / AutoSSL
+- Force HTTPS after SSL is active
+
+5. Admin
+- Open: https://yourdomain.com/admin/login
+- Login with the ADMIN_EMAIL and ADMIN_PASSWORD from .env
+- Immediately change the account password in Admin > Admin Account
+
+6. Launch checks
+- Update logo/contact/WhatsApp
+- Add real team photos and profiles
+- Add reviews only with permission
+- Add job openings
+- Submit a test enquiry and a test job application
+- Confirm resume upload works
+- Check mobile layout
+- Open /sitemap.xml and /robots.txt
+
+If your GoDaddy plan does not show "Setup Python App", use GoDaddy VPS or deploy this project to Render and point the GoDaddy domain to Render.

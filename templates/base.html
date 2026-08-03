@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}{{ site.meta_title }}{% endblock %}</title>
+
+    <meta
+        name="description"
+        content="{% block meta_description %}{{ site.meta_description }}{% endblock %}"
+    >
+
+    <meta name="theme-color" content="{{ site.dark_color }}">
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="{{ url_for('static', filename='images/nexicom-logo-transparent.png') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/site.css') }}"
+    >
+
+    <script
+        defer
+        src="{{ url_for('static', filename='js/site.js') }}"
+    ></script>
+</head>
+
+<body
+    data-primary-color="{{ site.primary_color }}"
+    data-deep-color="{{ site.deep_color }}"
+    data-dark-color="{{ site.dark_color }}"
+    data-bright-color="{{ site.bright_color }}"
+    data-light-color="{{ site.light_color }}"
+    data-border-radius="{{ site.border_radius }}"
+    data-font-family="{{ site.font_family }}"
+>
+
+    <div class="cursor-glow" aria-hidden="true"></div>
+
+    <header class="header">
+        <a
+            class="brand"
+            href="{{ url_for('home') }}"
+            aria-label="{{ site.site_name }} home"
+        >
+            <img
+                src="{{ url_for('static', filename=site.logo) }}"
+                alt="{{ site.site_name }}"
+            >
+
+            <span>
+                <b>{{ site.site_name }}</b>
+                <small>{{ site.tagline }}</small>
+            </span>
+        </a>
+
+        <button
+            type="button"
+            class="menu-btn"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+        >
+            ☰
+        </button>
+
+        <nav aria-label="Main navigation">
+            {% for nav_item in nav_items %}
+                {% set nav_label = nav_item.label|lower %}
+                {% set nav_url = nav_item.url|lower %}
+
+                {% if
+                    nav_label != 'team'
+                    and nav_label != 'leadership'
+                    and nav_label != 'leadership team'
+                    and nav_url != '/#team'
+                    and nav_url != '#team'
+                %}
+                    <a href="{{ nav_item.url }}">
+                        {{ nav_item.label }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+
+            <a class="nav-cta" href="{{ url_for('contact') }}">
+                Talk to Us
+            </a>
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-wrap" role="status" aria-live="polite">
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-glow" aria-hidden="true"></div>
+
+        <div class="footer-main">
+            <div class="footer-brand">
+                <img
+                    src="{{ url_for('static', filename=site.logo) }}"
+                    alt="{{ site.site_name }}"
+                >
+
+                <h3>{{ site.site_name }}</h3>
+                <p>{{ site.footer_text }}</p>
+
+                <a class="footer-cta" href="{{ url_for('contact') }}">
+                    Start a Conversation
+                    <span>→</span>
+                </a>
+            </div>
+
+            <div class="footer-column">
+                <b>Company</b>
+
+                <a href="{{ url_for('about') }}">About Nexicom</a>
+                <a href="{{ url_for('home') }}#services">Our Services</a>
+                <a href="{{ url_for('careers') }}">Careers</a>
+                <a href="{{ url_for('contact') }}">Contact</a>
+            </div>
+
+            <div class="footer-column">
+                <b>Solutions</b>
+
+                {% for service in services[:6] %}
+                    <a href="{{ url_for('service_detail', slug=service.slug) }}">
+                        {{ service.title }}
+                    </a>
+                {% else %}
+                    <span>No services available.</span>
+                {% endfor %}
+            </div>
+
+            <div class="footer-column footer-contact">
+                <b>Get in Touch</b>
+
+                {% if site.address %}
+                    <p>{{ site.address }}</p>
+                {% endif %}
+
+                {% if site.email %}
+                    <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+                {% endif %}
+
+                {% if site.phone %}
+                    <a href="tel:{{ site.phone }}">{{ site.phone }}</a>
+                {% endif %}
+
+                {% if site.whatsapp %}
+                    <a
+                        href="https://wa.me/{{ site.whatsapp }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        WhatsApp Us ↗
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>
+                © 2026 {{ site.site_name }}. All Rights Reserved.
+            </span>
+
+            <span>
+                Recruitment • Staffing • BPO • HR Consulting • Business Consulting
+            </span>
+
+            <a href="{{ url_for('admin_login') }}">
+                Admin Login
+            </a>
+        </div>
+    </footer>
+
+    {% if site.whatsapp %}
+        <a
+            class="whatsapp"
+            href="https://wa.me/{{ site.whatsapp }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat with us on WhatsApp"
+        >
+            ◉
+        </a>
+    {% endif %}
+
+    <script>
+        (() => {
+            const body = document.body;
+            const root = document.documentElement;
+
+            const setVariable = (name, value) => {
+                if (value && value.trim()) {
+                    root.style.setProperty(name, value.trim());
+                }
+            };
+
+            setVariable("--gold", body.dataset.primaryColor || "");
+            setVariable("--deep", body.dataset.deepColor || "");
+            setVariable("--dark", body.dataset.darkColor || "");
+            setVariable("--bright", body.dataset.brightColor || "");
+            setVariable("--light", body.dataset.lightColor || "");
+
+            if (body.dataset.borderRadius) {
+                setVariable("--radius", `${body.dataset.borderRadius}px`);
+            }
+
+            setVariable("--font", body.dataset.fontFamily || "");
+        })();
+    </script>
+
+    {% if site.custom_css %}
+        <template id="admin-custom-css-data">{{ site.custom_css }}</template>
+
+        <script>
+            (() => {
+                const template = document.getElementById("admin-custom-css-data");
+
+                if (!template) {
+                    return;
+                }
+
+                const styleElement = document.createElement("style");
+                styleElement.id = "admin-custom-css";
+                styleElement.textContent = template.content.textContent || "";
+                document.head.appendChild(styleElement);
+            })();
+        </script>
+    {% endif %}
+
+</body>
+</html>

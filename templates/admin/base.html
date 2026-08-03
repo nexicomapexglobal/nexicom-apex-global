@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin | Nexicom Apex Global</title>
+  <link rel="icon" href="{{url_for('static',filename='images/nexicom-logo-transparent.png')}}">
+  <link rel="stylesheet" href="{{url_for('static',filename='css/admin.css')}}">
+</head>
+<body>
+  <aside>
+    <a class="admin-brand" href="/admin">
+      <img src="{{url_for('static',filename='images/nexicom-logo-transparent.png')}}" alt="Nexicom">
+      <span>NEXICOM <small>ADMIN CONTROL CENTRE</small></span>
+    </a>
+    <div class="nav-label">Workspace</div>
+    <a class="{% if request.path == '/admin' %}active{% endif %}" href="/admin"><span>⌂</span> Dashboard</a>
+    <a class="{% if '/admin/design' in request.path %}active{% endif %}" href="/admin/design"><span>✦</span> Website Control</a>
+    <a class="{% if '/admin/services' in request.path %}active{% endif %}" href="/admin/services"><span>◈</span> Services</a>
+    <a class="{% if '/admin/team' in request.path %}active{% endif %}" href="/admin/team"><span>◎</span> Team & Popups</a>
+    <a class="{% if '/admin/reviews' in request.path %}active{% endif %}" href="/admin/reviews"><span>★</span> Reviews</a>
+    <div class="nav-label">Recruitment</div>
+    <a class="{% if '/admin/jobs' in request.path %}active{% endif %}" href="/admin/jobs"><span>▣</span> Careers / Jobs</a>
+    <a class="{% if '/admin/applications' in request.path %}active{% endif %}" href="/admin/applications"><span>✓</span> Applications</a>
+    <a class="{% if '/admin/messages' in request.path %}active{% endif %}" href="/admin/messages"><span>✉</span> CRM Enquiries</a>
+    <div class="nav-label">Account</div>
+    <a class="{% if '/admin/account' in request.path %}active{% endif %}" href="/admin/account"><span>⚙</span> Admin Account</a>
+    <div class="sidebar-spacer"></div>
+    <a href="/" target="_blank"><span>↗</span> View Website</a>
+    <a class="logout" href="/admin/logout"><span>⏻</span> Logout</a>
+  </aside>
+  <main>
+    <div class="mobile-admin-bar"><b>Nexicom Admin</b><a href="/">View site ↗</a></div>
+    {% with ms=get_flashed_messages(with_categories=true) %}{% for c,m in ms %}<div class="notice {{c}}">{{m}}</div>{% endfor %}{% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
