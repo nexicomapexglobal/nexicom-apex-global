@@ -3217,3 +3217,15 @@
         transition-duration: 0.01ms !important;
     }
 }
+.brand b {
+    font-family: 'Michroma', sans-serif;
+    font-size: 1.45rem;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+}
+.brand small {
+    font-family: 'Michroma', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    font-weight: 400;
+}
